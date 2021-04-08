@@ -1,0 +1,88 @@
+<!--  <script src="https://code.jquery.com/jquery-2.2.4.js" ></script>
+-->
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1952807638131249');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1952807638131249&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+
+
+<script>
+/* Page view */
+  
+  var url=window.location.href;
+
+
+
+//button click add to cart
+var el_color = document.getElementsByClassName('product-selected-colour')[0]; 
+var el_size = document.getElementsByClassName('product-selected-size')[0]; 
+
+
+
+if(el_color && el_size)
+{
+var el_colorhtml= el_color.innerHTML;
+var el_sizehtml=el_size.innerHTML;
+console.log(el_colorhtml);
+if(el_colorhtml!='Select Colour' && el_sizehtml!='Select Size')
+{
+  jQuery("#product-addtocart-button").click(function(){
+  
+fbq('track', 'AddToCart');
+  });
+  
+  document.getElementById("product-addtocart-button").addEventListener("click", function() {
+fbq('track', 'AddToCart');
+});
+  
+  
+}
+}
+
+ 
+
+if(url.includes("checkout"))
+{
+fbq('track', 'InitiateCheckout');
+
+fbq('track', 'AddPaymentInfo');
+  
+
+  
+if(url.includes("success"))
+{
+
+  var currency_final=document.getElementById("switcher-currency-trigger-nav").innerText;
+var prices=document.getElementsByClassName('price')[0];
+
+var regex = /[+-]?\d+(\.\d+)?/g;
+  var str2 = prices;
+var floats2 = str2.match(regex).map(function(v) { return parseFloat(v); });
+console.log(floats2);
+
+fbq('track', 'Purchase', {
+    value: floats2,
+    currency: currency_final
+  });
+
+  }
+
+}
+
+
+
+</script>
